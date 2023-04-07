@@ -5,7 +5,7 @@ main () {
     keep_running=true
     count=0
     echo "Starting..."
-    menu="\t\t* Bash Commands *\t\t\n\t- 1. List files\n\t- 2. Show free disk space\n\t- 3. Show system path\n\t- 4. Display command history\n\t- 5. Backup files\n\t- 6. Exit"
+    menu="\t\t* Bash Commands *\t\t\n\t1. List files\n\t2. Show free disk space\n\t3. Show system path\n\t4. Display command history\n\t5. Backup files\n\t6. Exit"
 
     while [ $keep_running == true ]
     do
@@ -17,9 +17,9 @@ main () {
             elif (( main_input=='1' )); then
                     echo -e "\n$(ls)\n"
             elif (( main_input=='2' )); then
-                    echo -e "\n$(df)\n"
+                    echo -e "\n$(df -h)\n"
             elif (( main_input=='3' )); then
-                    echo -e "\n$PATH\n"
+                    echo -e "\n$(pwd)\n"
             elif (( main_input=='4' )); then
                     echo -e "\n$(history)\n"
             elif (( main_input=='5' )); then
@@ -35,7 +35,7 @@ backup () {
     echo "Enter directory to backup: "
     read backup_directory
     mkdir "$(pwd)/BackupFolder" # Using absolute path
-    cp -r "$backup_directory/"* "$(pwd)/BackupFolder" # Using absolute path
+    cp -r "$backup_directory/"* "$(pwd)/BackupFolder" # Using relative path for dir to backup and absolute for BackupFolder
     echo -e "\nAll folders and files insede that directory where duplicated into $(pwd)/BackupFolder\n"
     echo -e "Recursively listing content of BackupFolder:\n"
     echo -e "$(tree $(pwd)/BackupFolder)\n"
